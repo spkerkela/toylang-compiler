@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Parser - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="Object.html">Object</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-consume">#consume</a>
+    
+    <li ><a href="#method-i-parse">#parse</a>
+    
+    <li ><a href="#method-i-parse_arg_exprs">#parse_arg_exprs</a>
+    
+    <li ><a href="#method-i-parse_arg_names">#parse_arg_names</a>
+    
+    <li ><a href="#method-i-parse_call">#parse_call</a>
+    
+    <li ><a href="#method-i-parse_def">#parse_def</a>
+    
+    <li ><a href="#method-i-parse_expr">#parse_expr</a>
+    
+    <li ><a href="#method-i-parse_integer">#parse_integer</a>
+    
+    <li ><a href="#method-i-parse_var_ref">#parse_var_ref</a>
+    
+    <li ><a href="#method-i-peek">#peek</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Parser">
+  <h1 id="class-Parser" class="class">
+    class Parser
+  </h1>
+
+  <section class="description">
+    
+<p>Parses a list of tokens into an AST</p>
+
+  </section>
+
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(tokens)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File compiler.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">tokens</span>)
+  <span class="ruby-ivar">@tokens</span> = <span class="ruby-identifier">tokens</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-consume" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">consume</span><span
+            class="method-args">(expected_type)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Consume a token, throw an error if next token not what expected</p>
+          
+          
+
+          
+          <div class="method-source-code" id="consume-source">
+            <pre><span class="ruby-comment"># File compiler.rb, line 136</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">consume</span>(<span class="ruby-identifier">expected_type</span>)
+  <span class="ruby-identifier">token</span> = <span class="ruby-ivar">@tokens</span>.<span class="ruby-identifier">shift</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">token</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">expected_type</span>
+    <span class="ruby-identifier">token</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">RuntimeError</span>.<span class="ruby-identifier">new</span>(
+      <span class="ruby-node">&quot;Expected token type #{expected_type.inspect} but got #{token.type.inspect}&quot;</span>
+    )
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-parse" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parse</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="parse-source">
+            <pre><span class="ruby-comment"># File compiler.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse</span>
+  <span class="ruby-identifier">parse_def</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-parse_arg_exprs" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parse_arg_exprs</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Parse function argument expressions</p>
+          
+          
+
+          
+          <div class="method-source-code" id="parse_arg_exprs-source">
+            <pre><span class="ruby-comment"># File compiler.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_arg_exprs</span>
+  <span class="ruby-identifier">arg_exprs</span> = []
+  <span class="ruby-identifier">consume</span>(<span class="ruby-value">:oparen</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">peek</span>(<span class="ruby-value">:cparen</span>)
+    <span class="ruby-identifier">arg_exprs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">parse_expr</span>
+    <span class="ruby-keyword">while</span> <span class="ruby-identifier">peek</span>(<span class="ruby-value">:comma</span>)
+      <span class="ruby-identifier">consume</span>(<span class="ruby-value">:comma</span>)
+      <span class="ruby-identifier">arg_exprs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">parse_expr</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">consume</span>(<span class="ruby-value">:cparen</span>)
+  <span class="ruby-identifier">arg_exprs</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-parse_arg_names" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parse_arg_names</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Parse function argument names</p>
+          
+          
+
+          
+          <div class="method-source-code" id="parse_arg_names-source">
+            <pre><span class="ruby-comment"># File compiler.rb, line 116</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_arg_names</span>
+  <span class="ruby-identifier">arg_names</span> = []
+  <span class="ruby-identifier">consume</span>(<span class="ruby-value">:oparen</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">peek</span>(<span class="ruby-value">:identifier</span>)
+    <span class="ruby-identifier">arg_names</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">consume</span>(<span class="ruby-value">:identifier</span>).<span class="ruby-identifier">value</span>
+    <span class="ruby-keyword">while</span> <span class="ruby-identifier">peek</span>(<span class="ruby-value">:comma</span>)
+      <span class="ruby-identifier">consume</span>(<span class="ruby-value">:comma</span>)
+      <span class="ruby-identifier">arg_names</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">consume</span>(<span class="ruby-value">:identifier</span>).<span class="ruby-identifier">value</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">consume</span>(<span class="ruby-value">:cparen</span>)
+  <span class="ruby-identifier">arg_names</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-parse_call" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parse_call</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Parse function call</p>
+          
+          
+
+          
+          <div class="method-source-code" id="parse_call-source">
+            <pre><span class="ruby-comment"># File compiler.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_call</span>
+  <span class="ruby-identifier">name</span> = <span class="ruby-identifier">consume</span>(<span class="ruby-value">:identifier</span>).<span class="ruby-identifier">value</span>
+  <span class="ruby-identifier">arg_exprs</span> = <span class="ruby-identifier">parse_arg_exprs</span>
+  <span class="ruby-constant">CallNode</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">arg_exprs</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-parse_def" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parse_def</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Parse function definiton</p>
+          
+          
+
+          
+          <div class="method-source-code" id="parse_def-source">
+            <pre><span class="ruby-comment"># File compiler.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_def</span>
+  <span class="ruby-identifier">consume</span>(<span class="ruby-value">:def</span>)
+  <span class="ruby-identifier">name</span> = <span class="ruby-identifier">consume</span>(<span class="ruby-value">:identifier</span>).<span class="ruby-identifier">value</span>
+  <span class="ruby-identifier">arg_names</span> = <span class="ruby-identifier">parse_arg_names</span>
+  <span class="ruby-identifier">body</span> = <span class="ruby-identifier">parse_expr</span>
+  <span class="ruby-identifier">consume</span>(<span class="ruby-value">:end</span>)
+  <span class="ruby-constant">DefNode</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">arg_names</span>, <span class="ruby-identifier">body</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-parse_expr" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parse_expr</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Parse expression</p>
+          
+          
+
+          
+          <div class="method-source-code" id="parse_expr-source">
+            <pre><span class="ruby-comment"># File compiler.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_expr</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">peek</span>(<span class="ruby-value">:integer</span>)
+    <span class="ruby-identifier">parse_integer</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">peek</span>(<span class="ruby-value">:identifier</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">peek</span>(<span class="ruby-value">:oparen</span>, <span class="ruby-value">1</span>)
+    <span class="ruby-identifier">parse_call</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">parse_var_ref</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-parse_integer" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parse_integer</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Parse integer literal</p>
+          
+          
+
+          
+          <div class="method-source-code" id="parse_integer-source">
+            <pre><span class="ruby-comment"># File compiler.rb, line 111</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_integer</span>
+  <span class="ruby-constant">IntegerNode</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">consume</span>(<span class="ruby-value">:integer</span>).<span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_i</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-parse_var_ref" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parse_var_ref</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Parse variable reference</p>
+          
+          
+
+          
+          <div class="method-source-code" id="parse_var_ref-source">
+            <pre><span class="ruby-comment"># File compiler.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_var_ref</span>
+  <span class="ruby-constant">VarRefNode</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">consume</span>(<span class="ruby-value">:identifier</span>).<span class="ruby-identifier">value</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-peek" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">peek</span><span
+            class="method-args">(expected_type, offset=0)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Peek at the next token, or a token specified by an offset</p>
+          
+          
+
+          
+          <div class="method-source-code" id="peek-source">
+            <pre><span class="ruby-comment"># File compiler.rb, line 131</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">peek</span>(<span class="ruby-identifier">expected_type</span>, <span class="ruby-identifier">offset</span>=<span class="ruby-value">0</span>)
+  <span class="ruby-ivar">@tokens</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">offset</span>).<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">expected_type</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
